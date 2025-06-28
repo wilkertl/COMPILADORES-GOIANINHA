@@ -1,0 +1,18 @@
+int soma(int a, int b) {
+    retorne a + b;
+}
+
+int multiplicacao(int x, int y, int z) {
+    retorne x * y * z;
+}
+
+programa {
+    int resultado;
+    
+    resultado = soma(10);  /* ERRO: faltam parametros */
+    resultado = soma(10, 20, 30);  /* ERRO: muitos parametros */
+    resultado = multiplicacao(5, 6);  /* ERRO: faltam parametros */
+    
+    escreva resultado;
+    novalinha;
+} 

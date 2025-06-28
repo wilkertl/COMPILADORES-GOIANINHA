@@ -24,6 +24,7 @@ typedef enum {
 typedef struct ASTNode {
     NodeType type;
     DataType data_type;
+    int line_number;  // Line number where this node was created
     union {
         struct {
             struct ASTNode* declarations;
@@ -120,24 +121,24 @@ typedef struct ASTNode {
 
 // Funções para criação de nós
 ASTNode* create_program_node(ASTNode* decls, ASTNode* main_block);
-ASTNode* create_var_decl_node(DataType type, ASTNode* id_list);
-ASTNode* create_func_decl_node(DataType type, char* name, ASTNode* params, ASTNode* body);
-ASTNode* create_param_node(DataType type, char* name);
-ASTNode* create_block_node(ASTNode* stmts);
-ASTNode* create_assign_node(char* var, ASTNode* expr);
-ASTNode* create_if_node(ASTNode* cond, ASTNode* then_stmt, ASTNode* else_stmt);
-ASTNode* create_while_node(ASTNode* cond, ASTNode* body);
-ASTNode* create_return_node(ASTNode* expr);
-ASTNode* create_read_node(char* var);
-ASTNode* create_write_node(ASTNode* expr);
-ASTNode* create_write_string_node(char* text);
-ASTNode* create_newline_node();
-ASTNode* create_binary_op_node(Operator op, ASTNode* left, ASTNode* right);
-ASTNode* create_unary_op_node(Operator op, ASTNode* operand);
-ASTNode* create_func_call_node(char* name, ASTNode* args);
-ASTNode* create_id_node(char* name);
-ASTNode* create_int_node(int value);
-ASTNode* create_char_node(char value);
+ASTNode* create_var_decl_node(DataType type, ASTNode* id_list, int line);
+ASTNode* create_func_decl_node(DataType type, char* name, ASTNode* params, ASTNode* body, int line);
+ASTNode* create_param_node(DataType type, char* name, int line);
+ASTNode* create_block_node(ASTNode* stmts, int line);
+ASTNode* create_assign_node(char* var, ASTNode* expr, int line);
+ASTNode* create_if_node(ASTNode* cond, ASTNode* then_stmt, ASTNode* else_stmt, int line);
+ASTNode* create_while_node(ASTNode* cond, ASTNode* body, int line);
+ASTNode* create_return_node(ASTNode* expr, int line);
+ASTNode* create_read_node(char* var, int line);
+ASTNode* create_write_node(ASTNode* expr, int line);
+ASTNode* create_write_string_node(char* text, int line);
+ASTNode* create_newline_node(int line);
+ASTNode* create_binary_op_node(Operator op, ASTNode* left, ASTNode* right, int line);
+ASTNode* create_unary_op_node(Operator op, ASTNode* operand, int line);
+ASTNode* create_func_call_node(char* name, ASTNode* args, int line);
+ASTNode* create_id_node(char* name, int line);
+ASTNode* create_int_node(int value, int line);
+ASTNode* create_char_node(char value, int line);
 
 // Funções para listas
 ASTNode* create_decl_list_node(ASTNode* item);

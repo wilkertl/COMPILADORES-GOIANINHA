@@ -1,0 +1,30 @@
+int soma(int a, int b) {
+    retorne a + b;
+}
+
+int multiplicacao(int x, int y) {
+    retorne x * y;
+}
+
+car obterChar(car c) {
+    retorne c;
+}
+
+programa {
+    int resultado1, resultado2;
+    car letra;
+    
+    resultado1 = soma(10, 20);
+    resultado2 = multiplicacao(5, 6);
+    letra = obterChar('X');
+    
+    escreva "Soma: ";
+    escreva resultado1;
+    novalinha;
+    escreva "Multiplicacao: ";
+    escreva resultado2;
+    novalinha;
+    escreva "Letra: ";
+    escreva letra;
+    novalinha;
+} 

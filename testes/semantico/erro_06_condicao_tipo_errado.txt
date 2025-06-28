@@ -1,0 +1,16 @@
+programa {
+    int numero;
+    car letra;
+    
+    numero = 10;
+    letra = 'A';
+    
+    se (letra)  /* ERRO: condicao deve ser int */
+    entao
+        escreva "teste1";
+    
+    enquanto (letra) execute /* ERRO: condicao deve ser int */
+        escreva "teste2";
+    
+    novalinha;
+} 

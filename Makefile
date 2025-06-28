@@ -9,7 +9,7 @@ INCDIR = include
 EXAMPLEDIR = examples
 
 # Arquivos fonte
-SOURCES = $(SRCDIR)/goianinha.tab.c $(SRCDIR)/lex.yy.c $(SRCDIR)/ast.c $(SRCDIR)/tabela_simbolos.c $(SRCDIR)/semantic.c $(SRCDIR)/mips_generator.c
+SOURCES = $(SRCDIR)/goianinha.tab.c $(SRCDIR)/lex.yy.c $(SRCDIR)/ast.c $(SRCDIR)/tabela_simbolos.c $(SRCDIR)/semantico.c $(SRCDIR)/mips_gerador.c
 OBJECTS = $(SOURCES:.c=.o)
 TARGET = goianinha
 

@@ -1,0 +1,43 @@
+int global1, global2;
+
+int funcao1(int param1) {
+    int local1;
+    local1 = param1 + global1;
+    retorne local1;
+}
+
+int funcao2(int param2, int param3) {
+    int local2, local3;
+    local2 = param2;
+    local3 = param3;
+    
+    se (local2 > local3)
+    entao {
+        int temp;
+        temp = local2;
+        local2 = local3;
+        local3 = temp;
+    }
+    
+    retorne local2 + local3;
+}
+
+programa {
+    int resultado1, resultado2;
+    int local_main;
+    
+    global1 = 10;
+    global2 = 20;
+    local_main = 5;
+    
+    resultado1 = funcao1(local_main);
+    resultado2 = funcao2(global1, global2);
+    
+    escreva "Resultado 1: ";
+    escreva resultado1;
+    novalinha;
+    
+    escreva "Resultado 2: ";
+    escreva resultado2;
+    novalinha;
+} 

@@ -19,13 +19,13 @@ COMPILADORES-GOIANINHA/
 │   ├── goianinha.y        # Especificação sintática (Bison)
 │   ├── ast.c              # Implementação da AST
 │   ├── tabela_simbolos.c  # Implementação da tabela de símbolos
-│   ├── semantic.c         # Analisador semântico
-│   └── mips_generator.c   # Gerador de código MIPS
+│   ├── semantico.c        # Analisador semântico
+│   └── mips_gerador.c     # Gerador de código MIPS
 ├── include/               # Arquivos de cabeçalho
 │   ├── ast.h
 │   ├── tabela_simbolos.h
-│   ├── semantic.h
-│   └── mips_generator.h
+│   ├── semantico.h
+│   └── mips_gerador.h
 ├── examples/              # Programas de exemplo
 │   ├── exemplo_basico.g
 │   ├── exemplo_expressoes.g
@@ -178,13 +178,13 @@ programa {
 - Armazena informações de tipo e declaração
 - Suporte a escopos aninhados
 
-### 4. Análise Semântica (`semantic.c`)
+### 4. Análise Semântica (`semantico.c`)
 - Verificação de tipos
 - Verificação de declaração de variáveis
 - Validação de chamadas de função
 - Detecção de redefinições
 
-### 5. Geração de Código (`mips_generator.c`)
+### 5. Geração de Código (`mips_gerador.c`)
 - Gera código assembly MIPS
 - Implementa expressões aritméticas
 - Gerencia registradores temporários
@@ -249,16 +249,16 @@ Código MIPS gerado em saida.asm
 - **`goianinha.y`**: Define gramática e ações semânticas
 - **`ast.h/c`**: Estruturas e funções da AST
 - **`tabela_simbolos.h/c`**: Gerenciamento de símbolos
-- **`semantic.h/c`**: Verificações semânticas
-- **`mips_generator.h/c`**: Geração de código assembly
+- **`semantico.h/c`**: Verificações semânticas
+- **`mips_gerador.h/c`**: Geração de código assembly
 
 ### Adicionando Novas Funcionalidades
 
 1. **Novos tokens**: Adicione em `goianinha.l`
 2. **Nova sintaxe**: Modifique `goianinha.y`
 3. **Novos tipos de nó**: Atualize `ast.h`
-4. **Novas verificações**: Implemente em `semantic.c`
-5. **Nova geração**: Adicione em `mips_generator.c`
+4. **Novas verificações**: Implemente em `semantico.c`
+5. **Nova geração**: Adicione em `mips_gerador.c`
 
 ## 📄 Licença
 

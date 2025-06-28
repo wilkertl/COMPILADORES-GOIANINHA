@@ -1,0 +1,7 @@
+programa {
+    int x;
+    x = 10;
+    y = 20;  /* ERRO: y nao foi declarada */
+    escreva x + y;
+    novalinha;
+} 

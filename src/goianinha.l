@@ -16,7 +16,8 @@ LETRA       [a-zA-Z]
 ID          ({LETRA}|_)({LETRA}|{DIGITO}|_)*
 INT_CONST   {DIGITO}+
 CHAR_CONST  '.'
-STRING      \"[^\"]*\"
+STRING      \"[^\"\n]*\"
+UNTERMINATED_STRING \"[^\"\n]*\n
 
 %x COMENTARIO
 
@@ -61,14 +62,25 @@ STRING      \"[^\"]*\"
 {INT_CONST}  { yylval.num = atoi(yytext); return INT_CONST; }
 {CHAR_CONST} { yylval.chr = yytext[1]; return CHAR_CONST; }
 {STRING}     { yylval.str = strdup(yytext); return STRING_CONST; }
+{UNTERMINATED_STRING} { 
+    fprintf(stderr, "Erro léxico na linha %d: String não terminada\n", yylineno-1); 
+    exit(1); 
+}
 
 "/*"         { BEGIN(COMENTARIO); }
 <COMENTARIO>[^*\n]*        { }
 <COMENTARIO>"*"+[^*/\n]*   { }
 <COMENTARIO>\n             { }
 <COMENTARIO>"*"+"/"        { BEGIN(INITIAL); }
+<COMENTARIO><<EOF>>        { 
+    fprintf(stderr, "Erro léxico na linha %d: Comentário não terminado\n", yylineno); 
+    exit(1); 
+}
 
 [ \t\r\n]+   { }
-.            { yyerror("Caractere inválido"); }
+.            { 
+    fprintf(stderr, "Erro léxico na linha %d: Caractere inválido '%c'\n", yylineno, yytext[0]); 
+    exit(1); 
+}
 
 %% 

@@ -1,0 +1,22 @@
+programa {
+    int numero;
+    car caractere;
+    
+    escreva "Digite um numero: ";
+    leia numero;
+    
+    escreva "Digite um caractere: ";
+    leia caractere;
+    
+    escreva "Voce digitou o numero: ";
+    escreva numero;
+    novalinha;
+    
+    escreva "E o caractere: ";
+    escreva caractere;
+    novalinha;
+    
+    escreva "Dobro do numero: ";
+    escreva numero * 2;
+    novalinha;
+} 

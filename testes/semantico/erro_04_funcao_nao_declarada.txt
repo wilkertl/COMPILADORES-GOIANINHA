@@ -1,0 +1,14 @@
+int soma(int a, int b) {
+    retorne a + b;
+}
+
+programa {
+    int resultado;
+    
+    resultado = soma(10, 20);  /* OK */
+    resultado = multiplicacao(5, 6);  /* ERRO: funcao nao declarada */
+    resultado = inexistente();  /* ERRO: funcao nao declarada */
+    
+    escreva resultado;
+    novalinha;
+} 

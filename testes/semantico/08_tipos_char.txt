@@ -1,0 +1,36 @@
+car obterProximoChar(car c) {
+    retorne c;
+}
+
+car compararChars(car c1, car c2) {
+    se (c1 == c2)
+    entao
+        retorne 'S';
+    senao
+        retorne 'N';
+}
+
+programa {
+    car letra1, letra2, resultado;
+    
+    letra1 = 'A';
+    letra2 = 'B';
+    
+    escreva "Primeira letra: ";
+    escreva letra1;
+    novalinha;
+    
+    escreva "Segunda letra: ";
+    escreva letra2;
+    novalinha;
+    
+    resultado = compararChars(letra1, letra2);
+    escreva "Sao iguais? ";
+    escreva resultado;
+    novalinha;
+    
+    letra1 = obterProximoChar('Z');
+    escreva "Nova letra: ";
+    escreva letra1;
+    novalinha;
+} 

@@ -3,10 +3,12 @@
 goianinha
 saida.asm
 
+
 # Generated files from flex/bison
 src/lex.yy.c
 src/goianinha.tab.c
 src/goianinha.tab.h
+run_semantic_test.sh
 
 # IDE files
 .vscode/
@@ -17,3 +19,8 @@ src/goianinha.tab.h
 # OS files
 .DS_Store
 Thumbs.db 
+
+
+
+parte3.pdf
+examples/

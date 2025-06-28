@@ -1,0 +1,33 @@
+int fibonacci(int n) {
+    se (n <= 1)
+    entao
+        retorne n;
+    senao
+        retorne fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int potencia(int base, int exp) {
+    se (exp == 0)
+    entao
+        retorne 1;
+    senao
+        retorne base * potencia(base, exp - 1);
+}
+
+programa {
+    int n, fib, pot;
+    
+    n = 6;
+    fib = fibonacci(n);
+    pot = potencia(2, 4);
+    
+    escreva "Fibonacci de ";
+    escreva n;
+    escreva " = ";
+    escreva fib;
+    novalinha;
+    
+    escreva "2^4 = ";
+    escreva pot;
+    novalinha;
+} 

@@ -1,0 +1,16 @@
+programa {
+    int numero;
+    car letra;
+    
+    numero = 10;
+    letra = 'A';
+    
+    numero = letra;  /* ERRO: atribuicao de char para int */
+    letra = numero;  /* ERRO: atribuicao de int para char */
+    
+    se (numero + letra)  /* ERRO: operacao entre tipos diferentes */
+    entao
+        escreva "teste";
+    
+    novalinha;
+} 

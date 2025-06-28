@@ -1,0 +1,11 @@
+int x;
+
+programa {
+    int x;  /* ERRO: x ja foi declarada globalmente */
+    int y, y;  /* ERRO: y declarada duas vezes */
+    
+    x = 10;
+    y = 20;
+    escreva x + y;
+    novalinha;
+}

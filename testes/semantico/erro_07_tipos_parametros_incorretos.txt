@@ -1,0 +1,31 @@
+int soma(int a, int b) {
+    retorne a + b;
+}
+
+car obterLetra(car c) {
+    retorne c;
+}
+
+int multiplicacao(int x, car y, int z) {
+    retorne x * z;
+}
+
+programa {
+    int resultado;
+    car letra;
+    
+    resultado = 10;
+    letra = 'A';
+    
+    /* ERRO: passando car onde espera int */
+    resultado = soma(letra, 5);
+    
+    /* ERRO: passando int onde espera car */
+    letra = obterLetra(resultado);
+    
+    /* ERRO: tipos incorretos nos parâmetros */
+    resultado = multiplicacao(letra, resultado, letra);
+    
+    escreva resultado;
+    novalinha;
+} 

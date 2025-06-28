@@ -1,0 +1,23 @@
+int x, y, z;
+car c1, c2;
+
+programa {
+    int a, b;
+    car ch;
+    
+    x = 10;
+    y = 20;
+    z = x + y;
+    c1 = 'Z';
+    c2 = 'B';
+    
+    a = x * 2;
+    b = y - 5;
+    ch = c1;
+    
+    escreva "Resultado: ";
+    escreva z;
+    novalinha;
+    escreva ch;
+    novalinha;
+} 
