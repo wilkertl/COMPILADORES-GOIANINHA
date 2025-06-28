@@ -1,138 +1,281 @@
-# Compilador para a linguagem Goianinha
+# Compilador Goianinha
 
-Este projeto implementa a primeira etapa de um compilador para a linguagem Goianinha, que consiste em:
+Um compilador completo para a linguagem de programação **Goianinha**, implementado em C usando Flex/Lex e Bison/Yacc.
 
-1. Uma implementação da tabela de símbolos
-2. Um analisador léxico
+## 📋 Visão Geral
 
-## Estrutura do Projeto
+Este projeto implementa todas as fases de um compilador clássico:
+- **Análise Léxica** (Tokenização)
+- **Análise Sintática** (Parsing com AST)
+- **Análise Semântica** (Verificação de tipos e escopo)
+- **Geração de Código** (Assembly MIPS)
+
+## 🏗️ Estrutura do Projeto
 
 ```
-.
-├── Makefile                      # Makefile principal
-├── README.md                     # Este arquivo
-├── tabela_simbolos/              # Implementação da tabela de símbolos
-│   ├── Makefile                  # Makefile da tabela de símbolos
-│   ├── tabela_simbolos.h         # Cabeçalho com definições da tabela
-│   ├── tabela_simbolos.cpp       # Implementação da tabela
-│   └── teste_tabela_simbolos.cpp # Programa de teste
-├── analisador_lexico/            # Implementação do analisador léxico
-│   ├── Makefile                  # Makefile do analisador léxico
-│   ├── tokens.h                  # Definição dos tokens
-│   ├── goianinha.l               # Arquivo de entrada para o Flex
-│   └── analisador_lexico.cpp     # Programa principal
-├── teste.g                       # Exemplo de código Goianinha
-└── teste_erros.g                 # Exemplo com erros léxicos
+COMPILADORES-GOIANINHA/
+├── src/                    # Código fonte
+│   ├── goianinha.l        # Especificação léxica (Flex)
+│   ├── goianinha.y        # Especificação sintática (Bison)
+│   ├── ast.c              # Implementação da AST
+│   ├── tabela_simbolos.c  # Implementação da tabela de símbolos
+│   ├── semantic.c         # Analisador semântico
+│   └── mips_generator.c   # Gerador de código MIPS
+├── include/               # Arquivos de cabeçalho
+│   ├── ast.h
+│   ├── tabela_simbolos.h
+│   ├── semantic.h
+│   └── mips_generator.h
+├── examples/              # Programas de exemplo
+│   ├── exemplo_basico.g
+│   ├── exemplo_expressoes.g
+│   └── exemplo_funcao.g
+├── Makefile              # Sistema de build
+└── README.md             # Este arquivo
 ```
 
-## Requisitos
+## 🚀 Como Usar
 
-Para compilar e executar este projeto, você precisará:
+### Pré-requisitos
 
-- g++ para compilar o código C++
-- flex para gerar o analisador léxico
-- make para facilitar a compilação
+- GCC (GNU Compiler Collection)
+- Flex (Fast Lexical Analyzer)
+- Bison (GNU Parser Generator)
+- Make
 
-Em sistemas baseados em Debian/Ubuntu, você pode instalar estes requisitos com:
+### Instalação no Ubuntu/Debian
 
 ```bash
-sudo apt-get install g++ flex make
+sudo apt update
+sudo apt install gcc flex bison make
 ```
 
-## Compilação
-
-Para compilar todo o projeto, execute na pasta raiz:
+### Compilação
 
 ```bash
+# Compilar o compilador
 make
+
+# Limpar arquivos gerados
+make clean
 ```
 
-Isso irá compilar tanto a tabela de símbolos quanto o analisador léxico.
-
-Para compilar apenas partes específicas:
+### Execução
 
 ```bash
-# Apenas a tabela de símbolos
-make tabela_simbolos
+# Compilar um programa Goianinha
+./goianinha programa.g
 
-# Apenas o analisador léxico
-make analisador_lexico
+# Executar teste automático
+make test
 ```
 
-## Executando
+## 📝 Sintaxe da Linguagem Goianinha
 
-### Teste da Tabela de Símbolos
+### Tipos de Dados
+- `int` - Números inteiros
+- `car` - Caracteres
 
-Para executar o teste da tabela de símbolos:
+### Declaração de Variáveis
+```goianinha
+int x, y, z;
+car c;
+```
 
+### Programa Principal
+```goianinha
+programa {
+    // comandos aqui
+}
+```
+
+### Operadores
+- **Aritméticos**: `+`, `-`, `*`, `/`
+- **Relacionais**: `==`, `!=`, `<`, `>`, `<=`, `>=`
+- **Lógicos**: `e` (AND), `ou` (OR), `!` (NOT)
+
+### Estruturas de Controle
+```goianinha
+// Condicional
+se (condicao) entao comando;
+se (condicao) entao comando senao comando;
+
+// Laço
+enquanto (condicao) execute comando;
+```
+
+### Funções
+```goianinha
+int funcao(int param1, car param2) {
+    // corpo da função
+    retorne valor;
+}
+```
+
+### Entrada e Saída
+```goianinha
+leia variavel;           // Lê um valor
+escreva expressao;       // Escreve um valor
+escreva "texto";         // Escreve uma string
+novalinha;               // Nova linha
+```
+
+## 📚 Exemplos
+
+### Exemplo Básico
+```goianinha
+int x;
+
+programa {
+    x = 42;
+    escreva x;
+    novalinha;
+}
+```
+
+### Exemplo com Expressões
+```goianinha
+int a, b, resultado;
+
+programa {
+    a = 10;
+    b = 5;
+    resultado = a + b * 2;
+    escreva resultado;    // Saída: 20
+    novalinha;
+}
+```
+
+### Exemplo com Função
+```goianinha
+int soma(int x, int y) {
+    retorne x + y;
+}
+
+int resultado;
+
+programa {
+    resultado = soma(15, 25);
+    escreva resultado;    // Saída: 40
+    novalinha;
+}
+```
+
+## 🔧 Arquitetura do Compilador
+
+### 1. Análise Léxica (`goianinha.l`)
+- Reconhece tokens da linguagem
+- Remove comentários e espaços em branco
+- Gera sequência de tokens para o parser
+
+### 2. Análise Sintática (`goianinha.y`)
+- Verifica a estrutura sintática do programa
+- Constrói a Árvore Sintática Abstrata (AST)
+- Implementa a gramática da linguagem
+
+### 3. Tabela de Símbolos (`tabela_simbolos.c`)
+- Gerencia escopo de variáveis e funções
+- Armazena informações de tipo e declaração
+- Suporte a escopos aninhados
+
+### 4. Análise Semântica (`semantic.c`)
+- Verificação de tipos
+- Verificação de declaração de variáveis
+- Validação de chamadas de função
+- Detecção de redefinições
+
+### 5. Geração de Código (`mips_generator.c`)
+- Gera código assembly MIPS
+- Implementa expressões aritméticas
+- Gerencia registradores temporários
+- Suporte a estruturas de controle
+
+## 🧪 Testes
+
+Execute os testes automáticos:
 ```bash
-cd tabela_simbolos
-./teste_tabela_simbolos
+make test
 ```
 
-Este teste demonstrará todas as operações implementadas na pilha de tabela de símbolos.
-
-### Analisador Léxico
-
-Para executar o analisador léxico em um arquivo de exemplo:
-
+Teste programas específicos:
 ```bash
-cd analisador_lexico
-./goianinha ../teste.g
+./goianinha examples/exemplo_basico.g
+./goianinha examples/exemplo_expressoes.g
+./goianinha examples/exemplo_funcao.g
 ```
 
-Isso mostrará todos os tokens identificados no arquivo de entrada, junto com seus lexemas e linhas.
+## 📊 Saída do Compilador
 
-Para testar a detecção de erros léxicos:
+O compilador gera:
+1. **Relatório de compilação** - Status de cada fase
+2. **Arquivo assembly** (`saida.asm`) - Código MIPS gerado
+3. **Mensagens de erro** - Em caso de erros léxicos, sintáticos ou semânticos
 
-```bash
-cd analisador_lexico
-./goianinha ../teste_erros.g
+### Exemplo de Saída
+```
+Análise sintática concluída com sucesso!
+Análise semântica concluída com sucesso!
+Código MIPS gerado em saida.asm
 ```
 
-Este arquivo contém exemplos de erros léxicos como caracteres inválidos, comentários não terminados e strings multi-linha.
+## 🔍 Funcionalidades Implementadas
 
-## Descrição das Funcionalidades
+- ✅ **Análise Léxica Completa**
+  - Reconhecimento de todos os tokens
+  - Tratamento de comentários
+  - Números, identificadores, strings
 
-### Tabela de Símbolos
+- ✅ **Análise Sintática com AST**
+  - Gramática completa da linguagem
+  - Construção de árvore sintática
+  - Tratamento de precedência de operadores
 
-A implementação da tabela de símbolos inclui:
+- ✅ **Análise Semântica Robusta**
+  - Verificação de tipos
+  - Controle de escopo
+  - Validação de declarações
 
-- Uma estrutura de dados para representar entradas na tabela (variáveis, funções e parâmetros)
-- Uma implementação de tabela de símbolos usando hash map
-- Uma pilha de tabelas de símbolos para gerenciar escopos
-- Operações para manipular a tabela (inserir, buscar, criar escopo, remover escopo)
+- ✅ **Geração de Código MIPS**
+  - Expressões aritméticas
+  - Estruturas de controle
+  - Chamadas de função
+  - Entrada/saída
 
-#### Funções Implementadas
+## 🛠️ Desenvolvimento
 
-1. `void iniciar()` - Inicializa a pilha de tabelas de símbolos
-2. `void criarEscopo()` - Cria uma nova tabela de símbolos e a empilha
-3. `std::shared_ptr<EntradaTabela> buscarSimbolo(const std::string& nome)` - Busca um símbolo na pilha de tabelas
-4. `void removerEscopoAtual()` - Remove a tabela de símbolos do topo da pilha
-5. `std::shared_ptr<EntradaTabela> inserirFuncao(const std::string& nome, TipoVar tipo, int numParams)` - Insere uma função na tabela atual
-6. `std::shared_ptr<EntradaTabela> inserirVariavel(const std::string& nome, TipoVar tipo, int posicao)` - Insere uma variável na tabela atual
-7. `std::shared_ptr<EntradaTabela> inserirParametro(const std::string& nome, TipoVar tipo, int posicao, std::shared_ptr<EntradaTabela> funcao)` - Insere um parâmetro na tabela atual
-8. `void eliminar()` - Elimina a pilha de tabelas de símbolos
+### Estrutura dos Arquivos Fonte
 
-### Analisador Léxico
+- **`goianinha.l`**: Define tokens e regras léxicas
+- **`goianinha.y`**: Define gramática e ações semânticas
+- **`ast.h/c`**: Estruturas e funções da AST
+- **`tabela_simbolos.h/c`**: Gerenciamento de símbolos
+- **`semantic.h/c`**: Verificações semânticas
+- **`mips_generator.h/c`**: Geração de código assembly
 
-O analisador léxico reconhece:
+### Adicionando Novas Funcionalidades
 
-- Palavras reservadas da linguagem Goianinha (programa, car, int, retorne, leia, escreva, novalinha, se, entao, senao, enquanto, execute, ou, e)
-- Identificadores (começam com letra ou underscore, seguidos de letras, dígitos ou underscores)
-- Constantes (inteiros, caracteres, strings)
-- Operadores (=, ==, !=, <, >, <=, >=, +, -, *, /, !)
-- Pontuação (;, ,, (, ), {, })
-- Comentários (/* ... */)
+1. **Novos tokens**: Adicione em `goianinha.l`
+2. **Nova sintaxe**: Modifique `goianinha.y`
+3. **Novos tipos de nó**: Atualize `ast.h`
+4. **Novas verificações**: Implemente em `semantic.c`
+5. **Nova geração**: Adicione em `mips_generator.c`
 
-#### Tratamento de Erros Léxicos
+## 📄 Licença
 
-O analisador identifica e reporta os seguintes erros:
-- `CARACTERE INVALIDO` - Quando um caractere que não faz parte da linguagem é encontrado
-- `COMENTARIO NAO TERMINA` - Quando um comentário é aberto com /* mas não é fechado com */
-- `CADEIA DE CARACTERES OCUPA MAIS DE UMA LINHA` - Quando uma string contém quebras de linha
+Este projeto foi desenvolvido para fins educacionais como parte de um curso de Compiladores.
 
-Ao encontrar um erro, uma mensagem é exibida no formato:
-```
-ERRO: [TIPO DE ERRO] [NÚMERO DA LINHA]
-```
+## 👥 Contribuição
+
+Para contribuir com o projeto:
+1. Faça um fork do repositório
+2. Crie uma branch para sua feature
+3. Implemente as mudanças
+4. Teste thoroughly
+5. Submeta um pull request
+
+## 📞 Suporte
+
+Para dúvidas ou problemas:
+- Verifique se todas as dependências estão instaladas
+- Execute `make clean` antes de recompilar
+- Consulte os exemplos na pasta `examples/` 
