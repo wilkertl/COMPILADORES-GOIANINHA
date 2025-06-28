@@ -36,7 +36,6 @@ COMPILADORES-GOIANINHA/
 │   ├── sintatico/        # Testes de análise sintática
 │   └── semantico/        # Testes de análise semântica
 ├── Makefile              # Sistema de build
-├── run_semantic_tests.sh # Script de testes semânticos
 └── README.md             # Este arquivo
 ```
 
