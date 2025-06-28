@@ -1,0 +1,19 @@
+# Build artifacts
+*.o
+goianinha
+saida.asm
+
+# Generated files from flex/bison
+src/lex.yy.c
+src/goianinha.tab.c
+src/goianinha.tab.h
+
+# IDE files
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db 
